@@ -1,6 +1,8 @@
 import { json } from '@sveltejs/kit';
 import { getCollection } from '../../db';
 
+
+// Update handyman
 export async function PUT({ request, params }) {
 	const _id = params.id;
 	const data = await request.json();
@@ -19,14 +21,17 @@ export async function PUT({ request, params }) {
 		});
 	}
 }
-export async function DELETE({ request, params }) {
-	const _id = params.service_id;
-	const data = await request.json();
+
+// dDelete handyman
+export async function DELETE({ params }) {
+	const _id = params.id;
+	console.log(_id)
 
 	try {
 		const collection = await getCollection('handyman');
 		const res = await collection.deleteOne({ _id });
 
+		console.log(res)
 		return json({
 			res,
 		});
